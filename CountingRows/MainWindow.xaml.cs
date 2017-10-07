@@ -10,6 +10,6 @@ namespace CountingRows
         Controller controller = new Controller();
         public View() => InitializeComponent();
 
-        private void Button1_Click(object sender, RoutedEventArgs e) => Grid1.ItemsSource = controller.AnalyseLogFile();
+        private void Button1_Click(object sender, RoutedEventArgs e) => DataContext = controller.AnalyseLogFile();
     }
 }

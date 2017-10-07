@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CountingRows"
         mc:Ignorable="d"
-        Title="View" Height="410.478" Width="922.61">
+        Title="Count the number of errors" Height="400" Width="400">
+    <Window.Resources>
+        <ResourceDictionary Source="Dictionary1.xaml" />
+    </Window.Resources>
     <Grid>
-        <Button Name="Button1" Content="Select a log file" HorizontalAlignment="Left" Height="49" Margin="10,10,0,0" VerticalAlignment="Top" Width="153" Click="Button1_Click"/>
-        <DataGrid HorizontalAlignment="Left" Name="Grid1" Height="305" Margin="10,64,0,0" VerticalAlignment="Top" Width="895" Grid.Column="2"/>
+        <Button Name="Button1" Content="Select a log file" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Click="Button1_Click" Background="#FF77DBE0"/>
+        <DataGrid ColumnHeaderStyle="{StaticResource DataGridCenterAll}" HorizontalAlignment="Stretch" Margin="10,70,10,10" VerticalAlignment="Stretch" Grid.Column="2" ItemsSource="{Binding}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type Error" Binding="{Binding TextError}" Width="*"/>
+                <DataGridTextColumn ElementStyle="{StaticResource DataGridTextRight}" Header="Quantity" Binding="{Binding CountError}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
