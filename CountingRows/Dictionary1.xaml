@@ -7,10 +7,21 @@
     <Style x:Key="DataGridTextRight">
         <Setter Property="TextBlock.TextAlignment" Value="Right" />
     </Style>
-    <!--<LinearGradientBrush x:Key="buttonBrush">
-        <GradientStopCollection>
-            <GradientStop Color="White" Offset="0" />
-            <GradientStop Color="Blue" Offset="1" />
-        </GradientStopCollection>
-    </LinearGradientBrush>-->
+    <Style TargetType="Button">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="150" />
+        <Setter Property="Background" Value="#FF77DBE0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="10,10,0,0" />
+    </Style>
+    <Style TargetType="DataGrid">
+        <Setter Property="Grid.Column" Value="2" />
+        <Setter Property="ItemsSource" Value="{Binding}" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="10,70,10,10" />
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridCenterAll}" />
+    </Style>
 </ResourceDictionary>
