@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace CountingRows
 {
@@ -15,38 +12,37 @@ namespace CountingRows
         public List<Grid> AnalyseLogFile()
         {
             List<Grid> result = new List<Grid>();
-            OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "log files (*.log)|*.log";
+            OpenFileDialog open = new OpenFileDialog
+            {
+                Filter = "log files (*.log)|*.log"
+            };
             bool? search = open.ShowDialog();
 
             if (search == true)
             {
-                string lines = open.FileName;
                 string searchMask = "[ERROR]";
-                foreach (string line in File.ReadLines(lines))
+                foreach (string line in File.ReadLines(open.FileName))
                 {
-                    int? indexOfString = line.IndexOf(searchMask);
-                    if (indexOfString >= 0)
+                    int indexOfString = line.IndexOf(searchMask);
+                    if (indexOfString != -1)
                     {
-                        string lineParse = line.Replace(searchMask, "");
-                        lineParse = lineParse.Trim();
+                        string lineParse = line.Replace(searchMask, "").Trim();
                         string[] errorsParse = lineParse.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                         foreach (string errorParse in errorsParse)
                         {
-                            if (model.dictionaryErrors.ContainsKey(errorParse.Trim()))
+                            if (model.DictionaryErrors.ContainsKey(errorParse.Trim()))
                             {
-                                model.dictionaryErrors[errorParse.Trim()]++;
+                                model.DictionaryErrors[errorParse.Trim()]++;
                             }
                             else
                             {
-                                model.dictionaryErrors.Add(errorParse.Trim(), 1);
+                                model.DictionaryErrors.Add(errorParse.Trim(), 1);
                             }
                         }
                     }
                 }
             }
-            result.Add(new Grid("Error", 0));
-            foreach (var pair in model.dictionaryErrors.OrderByDescending(pair => pair.Value))
+            foreach (var pair in model.DictionaryErrors.OrderByDescending(pair => pair.Value))
             {
                 result.Add(new Grid(pair.Key, pair.Value));
             }   
